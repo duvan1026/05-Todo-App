@@ -9,7 +9,7 @@ export class Todo {
     constructor( description ){
         this.id = uuid();
         this.description = description;
-        this.done = false;
+        this.done = false; //Nos permite identificar si el todo esta terminado o pendiente.
         this.createAt = new Date();
     }
 }
