@@ -27,6 +27,10 @@ const loadStore = () => {
     throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
 }
 
+const getTodos = ( filter = Filters.All ) => {
+
+}
+
 /**
  * crea un nuevo Todo
  * @param {String} description 
