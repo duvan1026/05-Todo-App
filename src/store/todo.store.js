@@ -23,7 +23,55 @@ const initStore = () => {
     console.log('initStore 🥑');
 }
 
+const loadStore = () => {
+    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+}
+
+/**
+ * crea un nuevo Todo
+ * @param {String} description 
+ */
+const addTodo = ( description ) => {
+
+    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+}
+
+/**
+ * 
+ * @param {String} todoId todo identifier
+ */
+const toggleTodo = ( todoId ) => {
+    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+}
+
+/**
+ * 
+ * @param {String} todoId todo identifier
+ */
+const deleteTodo = ( todoId ) => {
+    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+}
+
+const deleteCompleted = () => {
+    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+}
+
+const setFilter = ( newFilter = Filters.All) => {
+    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+}
+
+const getCurrentFilter = () => {
+    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+}
+
+
 
 export default{
+    deleteCompleted,
+    deleteTodo,
+    getCurrentFilter,
     initStore,
+    loadStore,
+    setFilter,
+    toggleTodo,
 }
