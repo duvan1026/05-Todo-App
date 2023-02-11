@@ -5,7 +5,7 @@
  */
 export const App = ( elementId ) => {
 
-    //Función autoinvocada, Cuando la funcion App() se llama
+    //Función anonima autoinvocada, Cuando la funcion App() se llama
     (()=> {
 
         const app = document.createElement('div');
