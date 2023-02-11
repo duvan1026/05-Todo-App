@@ -27,8 +27,23 @@ const loadStore = () => {
     throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
 }
 
-const getTodos = ( filter = Filters.All ) => {
 
+const getTodos = ( filter = Filters.All ) => {
+    switch( filter ){
+
+        case Filters.All:
+            return [...state.todos];
+
+        case Filters.Completed:
+            return state.todos.filter( todo => todo.done );// (todo.done === true)
+        
+        case Filters.Pending:
+            return state.todos.filter( todo => !todo.done );// (todo.done === false)
+        
+        default:
+            throw new Error(`Option ${ filter } is not valid`);
+        
+    }
 }
 
 /**
@@ -37,7 +52,9 @@ const getTodos = ( filter = Filters.All ) => {
  */
 const addTodo = ( description ) => {
 
-    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+    if( !description ) throw new Error('Description is requiered');
+
+    state.todos.push( new Todo(description) );
 }
 
 /**
@@ -53,27 +70,34 @@ const toggleTodo = ( todoId ) => {
  * @param {String} todoId todo identifier
  */
 const deleteTodo = ( todoId ) => {
-    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+    state.todos = state.todos.filter( todo => todo.id !== todoId ); //guarda todos los todo que no tengan ese id
 }
 
 const deleteCompleted = () => {
-    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+    state.todos = state.todos.filter( todo => todo.done ); // guarda todos los todo que esten completados
 }
 
+/**
+ * 
+ * @param {Filters} newFilter 
+ */
 const setFilter = ( newFilter = Filters.All) => {
-    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+    if( !Object.keys(Filters).includes(newFilter) ) throw new Error(`filter = ${ newFilter } is no valid`);
+    state.filter = newFilter;
 }
 
 const getCurrentFilter = () => {
-    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+    return state.filter.toString();
 }
 
 
 
 export default{
+    addTodo,
     deleteCompleted,
     deleteTodo,
     getCurrentFilter,
+    getTodos,
     initStore,
     loadStore,
     setFilter,
