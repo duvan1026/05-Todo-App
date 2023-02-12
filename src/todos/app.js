@@ -4,6 +4,7 @@ import { renderTodos } from "./use-cases";
 
 
 const ElementIDs = {
+    clearCompletedButton: '.clear-completed',
     TodoList: '.todo-list',//Apunta a .todo-list, se evita colocar string en  el codigo y centraliza la variable
     NewTodoInput: '#new-todo-input',
 }
@@ -33,6 +34,7 @@ export const App = ( elementId ) => {
     // Referencias HTML
     const newDescriptionInput = document.querySelector( ElementIDs.NewTodoInput );
     const todoListUl = document.querySelector( ElementIDs.TodoList );
+    const clearCompletedButton = document.querySelector( ElementIDs.clearCompletedButton);
 
 
 
@@ -75,6 +77,14 @@ export const App = ( elementId ) => {
         //Todo: Importante.
         todoStore.deleteTodo(element.getAttribute('data-id'));
         displayTodos();
+    });
+
+
+    clearCompletedButton.addEventListener( 'click', () => {
+
+        todoStore.deleteCompleted();
+        displayTodos();
+        
     });
 
 
