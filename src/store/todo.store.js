@@ -12,6 +12,8 @@ const state = {
         new Todo('Piedra del alma'),
         new Todo('Piedra del infinito'),
         new Todo('Piedra del tiempo'),
+        new Todo('Piedra del poder'),
+        new Todo('Piedra de la realidad'),
     ],
     filter: Filters.All,
 }
@@ -19,12 +21,26 @@ const state = {
 
 
 const initStore = () => {
-    console.log(state),
+    loadStore();
     console.log('initStore 🥑');
 }
 
 const loadStore = () => {
-    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+
+    if( !localStorage.getItem('state') ) return; // verifica si tiene variable alamcenada en el localStorage
+
+    const { todos = [], filter = Filters.All } = JSON.parse( localStorage.getItem('state') );// desectruturacion del JSON 
+    state.todos = todos;
+    state.filter = filter;
+
+}
+
+const saveStateToLocalStorage = () => {
+
+    //Todo: Impostante
+    //console.log( JSON.stringify(state) );// selerializa un string 
+    
+    localStorage.setItem( 'state',JSON.stringify(state) );
 }
 
 
@@ -53,16 +69,26 @@ const getTodos = ( filter = Filters.All ) => {
 const addTodo = ( description ) => {
 
     if( !description ) throw new Error('Description is requiered');
-
     state.todos.push( new Todo(description) );
+
+    saveStateToLocalStorage();
 }
 
 /**
- * 
+ * Regresar un nuevo arreglo con el todoId con su valor inverso
  * @param {String} todoId todo identifier
  */
 const toggleTodo = ( todoId ) => {
-    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+
+    state.todos = state.todos.map( todo => {
+
+        if( todo.id === todoId ){
+            todo.done = !todo.done;
+        }
+        return todo;
+    });
+
+    saveStateToLocalStorage(); 
 }
 
 /**
@@ -71,10 +97,12 @@ const toggleTodo = ( todoId ) => {
  */
 const deleteTodo = ( todoId ) => {
     state.todos = state.todos.filter( todo => todo.id !== todoId ); //guarda todos los todo que no tengan ese id
+    saveStateToLocalStorage();
 }
 
 const deleteCompleted = () => {
-    state.todos = state.todos.filter( todo => todo.done ); // guarda todos los todo que esten completados
+    state.todos = state.todos.filter( todo => !todo.done ); // guarda todos los todo que esten completados
+    saveStateToLocalStorage();
 }
 
 /**
@@ -84,6 +112,7 @@ const deleteCompleted = () => {
 const setFilter = ( newFilter = Filters.All) => {
     if( !Object.keys(Filters).includes(newFilter) ) throw new Error(`filter = ${ newFilter } is no valid`);
     state.filter = newFilter;
+    saveStateToLocalStorage();
 }
 
 const getCurrentFilter = () => {
