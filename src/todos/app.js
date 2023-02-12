@@ -32,18 +32,31 @@ export const App = ( elementId ) => {
 
     // Referencias HTML
     const newDescriptionInput = document.querySelector( ElementIDs.NewTodoInput );
+    const todoListUl = document.querySelector( ElementIDs.TodoList );
+
 
 
     // Listeners
+    /**
+    * Escucha el input para agregar nuevos todo
+     */
     newDescriptionInput.addEventListener( 'keyup', ( event ) =>{
         if( event.keyCode !== 13 ) return;
         //.trim = metodo que quita los espacios al inicio y al final del string
         if( event.target.value.trim().length === 0 ) return; // Valida que tenga algun valor el string
 
         todoStore.addTodo( event.target.value );//obtenemos el valor de la caja de texto
-        displayTodos();// renderizamos 
+        displayTodos();// renderizamos todos los todos 
         event.target.value = ''; // seteamos el valor del target.
     });// Escucho cuando alguien presiona y suelta la tecla
+
+
+    todoListUl.addEventListener( 'click', (event) => {
+        //Todo: Importante.
+        const element = event.target.closest('[data-id]'); // Busca el elemento HTML que tenga este datamas cercano
+        todoStore.toggleTodo(element.getAttribute('data-id'));
+        displayTodos();
+    });
 
 
 }
