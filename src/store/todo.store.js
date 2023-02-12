@@ -21,12 +21,18 @@ const state = {
 
 
 const initStore = () => {
-    console.log(state),
+    loadStore();
     console.log('initStore 🥑');
 }
 
 const loadStore = () => {
-    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+
+    if( !localStorage.getItem('state') ) return; // verifica si tiene variable alamcenada en el localStorage
+
+    const { todos = [], filter = Filters.All } = JSON.parse( localStorage.getItem('state') );// desectruturacion del JSON 
+    state.todos = todos;
+    state.filter = filter;
+
 }
 
 const saveStateToLocalStorage = () => {
