@@ -58,11 +58,19 @@ const addTodo = ( description ) => {
 }
 
 /**
- * 
+ * Regresar un nuevo arreglo con el todoId con su valor inverso
  * @param {String} todoId todo identifier
  */
 const toggleTodo = ( todoId ) => {
-    throw new Error('Not implemented');// por si alguien lo llama, aviso que aun noe sta implementado
+
+    state.todos = state.todos.map( todo => {
+
+        if( todo.id === todoId ){
+            todo.done = !todo.done;
+        }
+        return todo;
+    });
+ 
 }
 
 /**
