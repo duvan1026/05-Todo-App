@@ -5,7 +5,7 @@ import { renderTodos } from "./use-cases";
 
 const ElementIDs = {
     TodoList: '.todo-list',//Apunta a .todo-list, se evita colocar string en  el codigo y centraliza la variable
-
+    NewTodoInput: '#new-todo-input',
 }
 
 /**
@@ -28,6 +28,22 @@ export const App = ( elementId ) => {
         displayTodos();
 
     })();
+
+
+    // Referencias HTML
+    const newDescriptionInput = document.querySelector( ElementIDs.NewTodoInput );
+
+
+    // Listeners
+    newDescriptionInput.addEventListener( 'keyup', ( event ) =>{
+        if( event.keyCode !== 13 ) return;
+        //.trim = metodo que quita los espacios al inicio y al final del string
+        if( event.target.value.trim().length === 0 ) return; // Valida que tenga algun valor el string
+
+        todoStore.addTodo( event.target.value );//obtenemos el valor de la caja de texto
+        displayTodos();// renderizamos 
+        event.target.value = ''; // seteamos el valor del target.
+    });// Escucho cuando alguien presiona y suelta la tecla
 
 
 }
