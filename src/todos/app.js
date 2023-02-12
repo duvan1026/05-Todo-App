@@ -50,11 +50,30 @@ export const App = ( elementId ) => {
         event.target.value = ''; // seteamos el valor del target.
     });// Escucho cuando alguien presiona y suelta la tecla
 
-
+    /**
+     * Escucha el event para cambiar el toggle todo
+     */
     todoListUl.addEventListener( 'click', (event) => {
         //Todo: Importante.
         const element = event.target.closest('[data-id]'); // Busca el elemento HTML que tenga este datamas cercano
         todoStore.toggleTodo(element.getAttribute('data-id'));
+        displayTodos();
+    });
+
+    /**
+     * Evento para eliminar un todo especifico
+     */
+    todoListUl.addEventListener( 'click', (event) => {
+        //console.log(event);
+        //console.log(event.target);//className: "destroy"
+        const isDestroyElement = ( event.target.className === 'destroy' );
+        const element = event.target.closest('[data-id]'); // Busca el elemento HTML que tenga este datamas cercano
+
+
+        if( !element || !isDestroyElement ) return; // Validacion de element y isDestroyElement;
+
+        //Todo: Importante.
+        todoStore.deleteTodo(element.getAttribute('data-id'));
         displayTodos();
     });
 
