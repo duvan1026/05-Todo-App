@@ -16,7 +16,7 @@ export const App = ( elementId ) => {
 
     const displayTodos = () => {
         const todos = todoStore.getTodos( todoStore.getCurrentFilter() );
-        renderTodos(  );
+        renderTodos( ElementIDs.TodoList, todos );
     }
 
     //Función anonima autoinvocada, Cuando la funcion App() se llama
