@@ -1,9 +1,9 @@
 import { Todo } from '../todos/models/todo.model';
 
-const Filters = {
+export const Filters = {
     All: 'all',
     Completed: 'Completed',
-    Pending: 'Peding'
+    Pending: 'Peding',
 }
 
 
@@ -45,6 +45,7 @@ const saveStateToLocalStorage = () => {
 
 
 const getTodos = ( filter = Filters.All ) => {
+
     switch( filter ){
 
         case Filters.All:
@@ -110,7 +111,7 @@ const deleteCompleted = () => {
  * @param {Filters} newFilter 
  */
 const setFilter = ( newFilter = Filters.All) => {
-    if( !Object.keys(Filters).includes(newFilter) ) throw new Error(`filter = ${ newFilter } is no valid`);
+    //if( !Object.keys(Filters).includes(newFilter) ) throw new Error(`filter = ${ newFilter } is no valid`);
     state.filter = newFilter;
     saveStateToLocalStorage();
 }
