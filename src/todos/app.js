@@ -21,6 +21,11 @@ export const App = ( elementId ) => {
         renderTodos( ElementIDs.TodoList, todos );
     }
 
+
+    const updatePendingCount = () => {
+        
+    }
+
     //Función anonima autoinvocada, Cuando la funcion App() se llama
     (()=> {
 
